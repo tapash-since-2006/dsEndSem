@@ -69,7 +69,7 @@ void infixToPostfix(char infix[], char postfix[]){
                    (c != '^' && precedence(c) < precedence(peek()))) {
                     postfix[k++] = pop();
                 } else {
-                    break;
+                    break; // no need of popping can move forward to pushing into the stack the operator
                 }
             }
             push(c);  // push operator after popping
@@ -88,7 +88,7 @@ void infixToPrefix(char infix[], char prefix[]){
     char temp[SIZE];
     strcpy(temp, infix);
 
-    reverseAndSwap(temp);           // Reverse infix & swap parentheses
+    reverseAndSwap(temp);           
     char postfix[SIZE];
     infixToPostfix(temp, postfix);  // Convert reversed infix → postfix
     reverseAndSwap(postfix);        // Reverse postfix → prefix
