@@ -7,99 +7,70 @@ struct Node {
     int data;
 };
 
-struct Deque {
+struct Queue {
     struct Node* arr[MAX];
     int front;
     int rear;
 };
 
-void initDeque(struct Deque* dq) {
-    dq->front = 0;
-    dq->rear = 0;
+void initQueue(struct Queue* q) {
+    q->front = 0;
+    q->rear = 0;
 }
 
-int isEmpty(struct Deque* dq) {
-    return dq->front == dq->rear;
+int isEmpty(struct Queue* q) {
+    return q->front == q->rear;
 }
 
-int isFull(struct Deque* dq) {
-    return dq->rear >= MAX;
+int isFull(struct Queue* q) {
+    return q->rear >= MAX;
 }
 
-void insertRear(struct Deque* dq, struct Node* val) {
-    if (isFull(dq)) {
-        printf("Deque overflow at REAR!!\n");
+void enqueue(struct Queue* q, struct Node* val) {
+    if (isFull(q)) {
+        printf("Queue overflow!!\n");
         return;
     }
-    dq->arr[dq->rear++] = val;
+    q->arr[q->rear++] = val;
 }
 
-void insertFront(struct Deque* dq, struct Node* val) {
-    if (dq->front == 0) {
-        if (dq->rear >= MAX) {
-            printf("Deque overflow at FRONT!!\n");
-            return;
-        }
-        // Shift elements right to make space at front
-        for (int i = dq->rear; i > dq->front; i--)
-            dq->arr[i] = dq->arr[i - 1];
-        dq->rear++;
-    } else {
-        dq->front--;
-    }
-    dq->arr[dq->front] = val;
-}
-
-struct Node* deleteFront(struct Deque* dq) {
-    if (isEmpty(dq)) {
-        printf("Deque underflow at FRONT!!\n");
+struct Node* dequeue(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("Queue underflow!!\n");
         return NULL;
     }
-    return dq->arr[dq->front++];
+    return q->arr[q->front++];
 }
-
-struct Node* deleteRear(struct Deque* dq) {
-    if (isEmpty(dq)) {
-        printf("Deque underflow at REAR!!\n");
-        return NULL;
-    }
-    return dq->arr[--dq->rear];
-}
-
-void displayDeque(struct Deque* dq) {
-    if (isEmpty(dq)) {
-        printf("Deque is empty!\n");
+  
+void displayQueue(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty!\n");
         return;
     }
-    printf("Deque elements: ");
-    for (int i = dq->front; i < dq->rear; i++)
-        printf("%d ", dq->arr[i]->data);
+    printf("Queue elements: ");
+    for (int i = q->front; i < q->rear; i++)
+        printf("%d ", q->arr[i]->data);
     printf("\n");
 }
 
 int main() {
-    struct Deque dq;
-    initDeque(&dq);
+    struct Queue q;
+    initQueue(&q);
 
     struct Node a = {10};
     struct Node b = {20};
     struct Node c = {30};
-    struct Node d = {40};
 
-    insertRear(&dq, &a);
-    insertRear(&dq, &b);
-    insertFront(&dq, &c);
-    insertRear(&dq, &d);
+    enqueue(&q, &a);
+    enqueue(&q, &b);
+    enqueue(&q, &c);
 
-    displayDeque(&dq);
+    displayQueue(&q);
 
-    struct Node* temp = deleteFront(&dq);
-    if (temp) printf("Deleted from front: %d\n", temp->data);
+    struct Node* temp = dequeue(&q);
+    if (temp) printf("Dequeued: %d\n", temp->data);
 
-    temp = deleteRear(&dq);
-    if (temp) printf("Deleted from rear: %d\n", temp->data);
-
-    displayDeque(&dq);
+    displayQueue(&q);
 
     return 0;
 }
