@@ -104,6 +104,29 @@ char ancestorOrParent(struct Node* root, char parent, char target){
     return right;
 }
 
+
+// int findParent(struct Node* root, int key){
+//     if(root==NULL){
+//         return -1;
+//     }
+
+//     if(root->left && root->left->item==key){
+//         return root->item;
+//     }
+
+//     if(root->right && root->right->item==key){
+//         return root->item;
+//     }
+
+//     int left=findParent(root->left, key);
+//     if(left!=-1){
+//         return left;
+//     }
+//     return findParent(root->right, key);
+// }
+
+
+
 void siblings(struct Node* root, char key){
     if(root==NULL){
         return;

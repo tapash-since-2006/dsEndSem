@@ -108,6 +108,9 @@ void preorderIter(struct Node* root){
     }
 }
 
+
+
+// finding the deptbh
 int findDepth(struct Node* root, char data[], int currDepth){ // depth of a tree==height of a tree
 
     if(root==NULL){

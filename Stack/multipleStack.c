@@ -46,6 +46,7 @@ int pop(struct multiStack* ms, int stackNum){
 
     int index=ms->top[stackNum];
     int popped=ms->arr[index];
+
     ms->top[stackNum]=ms->next[index];
     ms->next[index]=ms->freeSpot;
     ms->freeSpot=index;

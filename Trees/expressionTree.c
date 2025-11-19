@@ -25,6 +25,7 @@ struct Node* createTree() {
     struct Node* root = createNode(data);
 
     printf("Does '%c' have a left child? (y/n): ", data);
+    getchar();
     scanf(" %c", &hasLeft);
     if (hasLeft == 'y' || hasLeft == 'Y')
         root->left = createTree();

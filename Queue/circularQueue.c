@@ -22,7 +22,9 @@ void enqueue(int data) {
     }
 
     if (front == -1) {
-        front = 0;
+        front = rear = 0;
+        arr[0]=data;
+        return;
     }
 
     rear = (rear + 1) % size;
@@ -38,7 +40,7 @@ int dequeue() {
 
     int popped = arr[front];
 
-    if (front == rear) {
+    if (front == 0) {
         front = rear = -1;
     } else {
         front = (front + 1) % size;
